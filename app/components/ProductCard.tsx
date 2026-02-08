@@ -21,7 +21,7 @@ const ProductCard = () => {
   // Use Effect
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [data])
 
   const handleDelete = async (id: any) => {
     await DeleteData(id);

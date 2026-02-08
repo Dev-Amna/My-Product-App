@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native'
-import { scale, verticalScale, moderateScale, s } from 'react-native-size-matters';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { scale, verticalScale, moderateScale,  } from 'react-native-size-matters';
 
 
 

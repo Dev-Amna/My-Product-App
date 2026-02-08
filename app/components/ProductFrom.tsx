@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import { pushData } from '../api/ProductApi';
 import MyButton from '../Molecules/MyButton';
 
@@ -7,8 +7,24 @@ const ProductFrom = () => {
   const [data, setData] = useState({ name: "", price: 0, image: "" });
 
   const PrintValue = async () => {
-    const giveData = await pushData(data)
-    console.log("Api respon like this : ", giveData);
+
+    if (!data.name || !data.price || !data.image) {
+      Alert.alert("Please fill all the inputs");
+      return; // stop execution if fields are empty
+    }
+
+    try {
+      const giveData = await pushData(data)
+      console.log("Api response like this : ", giveData);
+      setData({ name: "", price: 0, image: "" });
+    }
+    catch (error) {
+      console.log("Error Shown", error);
+      Alert.alert("Failed to add product!!");
+    }
+
+
+
   }
 
   return (
@@ -28,7 +44,7 @@ export default ProductFrom;
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    maxWidth: 400,        
+    maxWidth: 400,
     gap: 12,
     paddingHorizontal: 15,
     paddingVertical: 20,
@@ -39,12 +55,12 @@ const styles = StyleSheet.create({
   },
 
   inputStyle: {
-    width: "100%",       
+    width: "100%",
     borderWidth: 1,
     borderColor: "gray",
     borderRadius: 10,
     paddingHorizontal: 12,
     paddingVertical: 14,
-    
+
   }
 });
