@@ -14,13 +14,14 @@ I use backend api for perform CRUD
 
 ## App Preview
 
-<video 
-  src="./assets/product-app.mp4" 
-  controls 
-  muted 
-  autoplay 
-  loop 
-  playsinline 
-  width="300">
-</video>
+### Dashboard
+![Dashboard](./assets/Preview/dashbard.jpeg)
 
+### Add Product Form
+![Add Product](./assets/Preview/product_add_from.jpeg)
+
+### Update Product Click
+![Update Product](./assets/Preview/click-update.jpeg)
+
+### Empty State
+![Empty Input](./assets/Preview/empty_input.jpeg)
