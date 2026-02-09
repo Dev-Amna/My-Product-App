@@ -1,19 +1,33 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { scale, verticalScale, moderateScale,  } from 'react-native-size-matters';
+import { StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
+const MyButton = ({
+  btnText,
+  btnWork,
+  giveStyle,
+  variant = "primary",
+  loading = false,
+  full = false
+}: any) => {
 
-
-const MyButton = ({ btnText, btnWork, giveStyle }: any) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.85}
       onPress={btnWork}
-      style={[styles.button, giveStyle]}
+      disabled={loading}
+      style={[
+        styles.button,
+        styles[variant],
+        full && { width: "100%" },
+        giveStyle
+      ]}
     >
-      <Text style={styles.buttonText}>
-        {btnText}
-      </Text>
+      {loading ? (
+        <ActivityIndicator color="#fff" />
+      ) : (
+        <Text style={styles.buttonText}>{btnText}</Text>
+      )}
     </TouchableOpacity>
   )
 }
@@ -22,19 +36,32 @@ export default MyButton
 
 const styles = StyleSheet.create({
   button: {
-    width: "100%",
-
-    borderRadius: 12,
-    paddingVertical: verticalScale(10),
-    paddingHorizontal: scale(15),
-    backgroundColor: "blue",
+    minWidth: scale(110),
+    paddingVertical: verticalScale(12),
+    paddingHorizontal: scale(18),
+    borderRadius: moderateScale(10),
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center"
+    elevation: 3,
   },
+
   buttonText: {
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(14),
     fontWeight: "600",
-    color: "white",
-  }
+    color: "#fff",
+  },
+
+  primary: {
+    backgroundColor: "#2563eb",
+  },
+
+  danger: {
+    backgroundColor: "#dc2626",
+  },
+
+  outline: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#2563eb",
+  },
 })

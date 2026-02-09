@@ -1,20 +1,21 @@
 
 import { StyleSheet, Text, } from "react-native";
-import ProductFrom from "./components/ProductFrom";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import MyButton from "./Molecules/MyButton";
 import { moderateScale } from "react-native-size-matters";
+import ProductCard from "./components/ProductCard";
 
 export default function Index() {
   const next = () => {
-    router.push("/components/ProductCard");
+    router.push("/components/ProductFrom");
   }
   return (
     <SafeAreaView style={stlyes.container}>
       <Text style={stlyes.heading} >My Product App</Text>
-      <ProductFrom />
-      <MyButton btnText={"See Products!"} btnWork={() => next()} />
+      <ProductCard />
+      <MyButton btnText={"Add Product!"} btnWork={() => next()} />
     </SafeAreaView>
   );
 }

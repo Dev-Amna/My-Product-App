@@ -1,12 +1,11 @@
+
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import Modal from 'react-native-modal';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { moderateScale, scale } from 'react-native-size-matters';
 import { DeleteData, getData, updateData } from '../api/ProductApi';
 import MyButton from '../Molecules/MyButton';
-import Modal from 'react-native-modal';
-import { moderateScale } from 'react-native-size-matters';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router';
 
 const ProductCard = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,35 +35,36 @@ const ProductCard = () => {
   const SaveUpdateData = async () => {
     await updateData(editItem);
     setEditItem(null);
-    fetchData()
+    fetchData();
     setIsVisible(false);
   }
-  const back = () => {
-    router.back()
+  
+  const Canal = () => {
+    setIsVisible(false);
   }
   const renderItem = ({ item }: any) => {
     return (
 
       <View style={styles.card}>
         <Image source={{ uri: item.image }} style={styles.imageStyle} />
-        <Text>{item.name}</Text>
-        <Text>{item.price}</Text>
+
+        <View style={styles.info}>
+          <Text style={styles.nameProduct}>{item.name} </Text>
+          <Text style={styles.price}>{item.price} $</Text>
+      
 
         <View style={styles.buttonContainer}>
           <MyButton btnText={"Delete !!"} btnWork={() => handleDelete(item._id)} giveStyle={styles.btnStyle} />
           <MyButton btnText={"Update !!"} btnWork={() => handleUpdate(item)} giveStyle={styles.btnStyle2} />
         </View>
+          </View>
       </View>
 
     )
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="arrow-back-outline" size={24} color="black" onPress={back} />
-        <Text style={styles.heading}>My Products</Text>
-        <View></View>
-      </View>
+      
 
       <Modal isVisible={isVisible}>
         {editItem && (
@@ -94,7 +94,11 @@ const ProductCard = () => {
             />
 
 
-            <MyButton btnText={"Save Update!"} btnWork={SaveUpdateData} />
+            <View style={styles.buttonContainer}>
+              <MyButton btnText={"Canal"} btnWork={Canal} giveStyle={styles.btnStyle} />
+              <MyButton btnText={"Save Update!"} btnWork={SaveUpdateData} giveStyle={styles.btnStyle2} />
+
+            </View>
           </View>
         )}
       </Modal>
@@ -105,6 +109,11 @@ const ProductCard = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>NO PRODUCT FOUND</Text>
+          </View>
+        }
       />
     </SafeAreaView>
   );
@@ -113,16 +122,10 @@ const ProductCard = () => {
 export default ProductCard
 
 const styles = StyleSheet.create({
-  header: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly"
-  },
-  heading: {
-    fontSize: moderateScale(25),
-    fontWeight: "bold"
-  },
+ info : {
+   paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(10),
+ },
   inputContainer: {
     gap: moderateScale(12),
     backgroundColor: "white",
@@ -132,15 +135,29 @@ const styles = StyleSheet.create({
   },
   btnStyle: {
     backgroundColor: "red",
-    maxWidth: moderateScale(100),
+    maxWidth: moderateScale(120),
     paddingVertical: moderateScale(10),
     borderRadius: moderateScale(8),
   },
   btnStyle2: {
-    maxWidth: moderateScale(100),
+    maxWidth: moderateScale(150),
     paddingVertical: moderateScale(10),
     borderRadius: moderateScale(8),
   },
+  
+  nameProduct: {
+    fontSize: moderateScale(25),
+    fontWeight: "bold",
+
+  },
+  price: {
+    marginTop: 4,
+    fontSize: moderateScale(14),
+    color: "#666",
+
+  }
+
+  ,
   container: {
     width: "100%",
     alignItems: "center",
@@ -150,23 +167,24 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: moderateScale(20),
-    alignItems: "center",
+   
     width: moderateScale(300),
     backgroundColor: "white",
     gap: moderateScale(12),
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: moderateScale(20),
+    paddingHorizontal: moderateScale(0),
+    paddingVertical: moderateScale(0),
     borderRadius: moderateScale(12),
     elevation: 5,
   },
   imageStyle: {
-    width: moderateScale(200),
-    height: moderateScale(100),
+    width : "100%",
+    height: moderateScale(200),
     borderRadius: moderateScale(12),
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    gap: scale(12),
     width: "100%",
     marginTop: moderateScale(10),
   },
@@ -178,4 +196,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(12),
     paddingVertical: moderateScale(14),
   },
+  emptyContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: moderateScale(50),
+  },
+  emptyText: {
+    fontSize: moderateScale(18),
+    fontWeight: "600",
+    color: "#999",
+  }
+
 });
