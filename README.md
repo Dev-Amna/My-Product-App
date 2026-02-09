@@ -1,9 +1,7 @@
-# Welcome to My Product app 👋
+# Welcome to My Product App 👋
 
-
-
-A simple React Native CRUD app to manage products.
-I use backend api for perform CRUD  
+A simple React Native CRUD app to manage products.  
+I use a backend API to perform CRUD operations.
 
 ## Features
 - Add product
@@ -15,13 +13,13 @@ I use backend api for perform CRUD
 ## App Preview
 
 ### Dashboard
-![Dashboard](./assets/Preview/dashbard.jpeg)
+<img src="./assets/Preview/dashbard.jpeg" width="400" />
 
 ### Add Product Form
-![Add Product](./assets/Preview/product_add_from.jpeg)
+<img src="./assets/Preview/product_add_from.jpeg" width="400" />
 
 ### Update Product Click
-![Update Product](./assets/Preview/click-update.jpeg)
+<img src="./assets/Preview/click-update.jpeg" width="400" />
 
 ### Empty State
-![Empty Input](./assets/Preview/empty_input.jpeg)
+<img src="./assets/Preview/empty_input.jpeg" width="400" />
