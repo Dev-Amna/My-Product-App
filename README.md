@@ -14,5 +14,13 @@ I use backend api for perform CRUD
 
 ## App Preview
 
-[Watch App Demo](./assets/product-app.mp4)
+<video 
+  src="./assets/product-app.mp4" 
+  controls 
+  muted 
+  autoplay 
+  loop 
+  playsinline 
+  width="300">
+</video>
 
