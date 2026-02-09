@@ -23,3 +23,6 @@ I use a backend API to perform CRUD operations.
 
 ### Empty State
 <img src="./assets/Preview/empty_input.jpeg" width="400" />
+
+
+## Thanks for checking my moblie app project!!
